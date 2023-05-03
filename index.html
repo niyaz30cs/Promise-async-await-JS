@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>**PROMISE ASYNC AWAIT**</h1>
+    <h2 class="question">Q-1.Write one example explaining how you can write a callback function?</h2>
+    <p>ANS:- <span class="one">Hii I am callback</span></p>
+    <pre>
+        function print(){
+            setTimeout(()=>{
+                console.log("Hii I am callback");
+            },1000)
+        }
+        function Display(print){
+            print();
+        }
+        Display(print);
+
+
+        OUTPUT:-Hii i am callback
+    </pre>
+    <pre>
+        //2nd callback function.
+
+        function callback(){
+            console.log("callback function 2nd");
+        }
+        function sayname(gre){
+            console.log(`welcome to ${gre}`);
+        }
+        setTimeout(callback,2000);
+        sayname("PrepBytes");
+
+        OUTPUT:-welcome to prepbytes
+    </pre>
+
+    <h2 class="question">Q-2.Write a callback function to print number from 1 to 7, which 1 should
+        be 1 sec, 2 should be 2 sec, 3 should be 3 sec and so on.
+        <br>
+        Expalain callback hell
+        <br>
+        1
+        <br>
+        2
+        <br>
+        3
+        <br>
+        4
+        <br>
+        5
+        <br>
+        6
+        <br>
+        7
+    </h2>
+    <p>ANS:- 1,2,3,4,5,6,7<span class="one"> callback hell function may calling function inside the function--OUTPUT=>1 2 3 4 5 6 7</span></p>
+    <pre>
+        let num=0;
+setTimeout(()=>{
+    console.log(++num);
+    setTimeout(()=>{
+        console.log(++num);
+        setTimeout(()=>{
+            console.log(++num);
+            setTimeout(()=>{
+                console.log(++num);
+                setTimeout(()=>{
+                    console.log(++num);
+                    setTimeout(()=>{
+                        console.log(++num);
+                        setTimeout(()=>{
+                            console.log(++num);
+                        },7000);
+                    },6000);
+                },5000);
+            },4000);
+        },3000);
+    },2000);
+},1000);
+
+
+OUTPUT:-1 2 3 4 5 6 7
+    </pre>
+
+<h2 class="question">Q-3.Create a Promise function accepting an argument if yes is passed to the 
+    function then it should go to resolved state and print Promise Resolved, and if nothing is
+    passed then it should go to reject the state and catch the error and print Promise Rejected?
+</h2>
+<p>ANS:- <span class="one"></span></p> 
+<pre>
+    function isPrime(num){
+        return new Promise((resolve,reject)=>{
+            if(num<2){
+                reject("Number is greater than 2");
+            }
+            else{
+                for(let i=1;i<=Math.sqrt(num);i++)
+                {
+                    if(num%i===0)
+                    {
+                        reject("Number is not prime");
+                    }
+                }
+                resolve("Number is prime");
+            }
+        });
+    }
+    
+    isPrime(7).then((result)=>console.log(result)).catch((error)=>console.log(error));
+</pre> 
+1st Code....
+<pre>
+    /////print vowel---A,E,I,O,U
+
+    function result(alpha,timeout){
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                console.log(alpha);
+                resolve("Resolve Successfully");
+            }, timeout);
+        })
+    }
+    
+    function vowel(){
+        result("A",2000)
+        .then(()=>result("E",3000))
+        .then(()=>result("I",4000))
+        .then(()=>result("0",2000))
+        .then(()=>result("E",7000))
+    }
+    vowel();
+
+
+    OUTPUT:-A E I O U
+    
+</pre>
+
+2nd Code...
+<pre>
+    *****3rd code for this question---- OUTPUT=sorry
+
+    new Promise((resolve,reject)=>{
+        if(false)
+        {
+            resolve("Resolved Successfully");
+        }
+        else
+        {
+            reject("Sorry");
+        }
+    })
+    
+    .then((data)=>console.log(data)).catch((error)=>console.log(error));
+
+    OUTPUT:-sorry
+</pre>
+
+
+<h2 class="question">Q-4.Create example to explain callback function?</h2>
+<p>ANS:- <span class="one">It is a create a function and and defined inside another function.and access element 
+    from the parent scope.
+    <ul>
+        <li>you can also pass a function as an argument to a function. this function that is 
+            passed as an argument inside of another function called callback function.
+        </li>
+    </ul>
+</span>
+</p>
+<pre>
+    function print(){
+        setTimeout(()=>{
+            console.log("Hii PrepBytes");
+        },2000);
+    }
+    
+    function display(data){
+        print()
+    }
+    display(print);
+
+
+    OUTPUT:-Hii prepbytes
+</pre>
+
+<h2 class="question">Q-5.Create example to explain callback hell function?</h2>
+<p>ANS:- <span class="one">OUTPUT:-A,E,I,O,U 
+    <ul>
+        <li>The phenomenon which happens when we next multiple callback within a function is called callback function.</li>
+        <li>The shape of the resulting code structure resemble a pyramid and hence callback hell is called the pyramd of doom.
+            <ol>
+                <li>Code complexity.</li>
+                <li>Debugging difficulties.</li>
+                <li>Maintainace challanges.</li>
+                <li>Code duplication.</li>
+                <li>Lake od readability.</li>
+            </ol>
+        </li>
+    </ul>
+</span></p>
+
+<pre>
+    setTimeout(()=>{
+        console.log("A");
+        setTimeout(()=>{
+            console.log("E");
+            setTimeout(()=>{
+                console.log("I");
+                setTimeout(()=>{
+                    console.log("O");
+                    setTimeout(()=>{
+                        console.log("U");
+                    },5000);
+                },4000);
+            },3000);
+        },2000);
+    },1000);
+
+    OUTPUT:-A E I O U
+</pre>
+
+<h2 class="question">Q-6.Create example to explain promise function.</h2>
+<p>ANS:- <span class="one"> OUTPUT SECOND CODE:-Even,Odd----
+    <ul>
+        <li>The promise Object represent the completion or failure of an asynchronous operation and it resulting value.</li>
+        <li>it take two prameter resolve and reject.</li>
+        <li>if we are getting success response then we will use resolve to give response.</li>
+        <li>if we are getting error use reject to give error.</li>
+        <li>it is provided two value .then and .catch .if you want acess response use .then and you are getting
+            error use .catch.</li>
+        <li>There are mainly three stage of the Promise.
+            <ol>
+                <li>pendding:-it is the initial stage of each promise.it is represented the result has 
+                    been complete or not.
+                </li>
+                <li>Resolve:-it means the operation has completed.</li>
+                <li>Reject:-it means the opeeation has failled.</li>
+            </ol>
+        </li>    
+    </ul>
+</span></p>
+
+<pre>
+    new Promise((resolve,reject)=>{
+        resolve(10);
+        reject(20);
+    })
+    
+    .then((data)=>console.log(data)).catch((error)=>console.log(error));
+</pre>
+2nd Code related to promise..
+<pre>
+    function promise(num){
+        return new Promise((resolve,reject)=>{
+            if(num==="yes")
+            {
+                resolve("Even");
+            }
+            else
+            {
+                reject("Odd");
+            }
+        })
+    }
+    
+    promise("yes").then((data)=>console.log(data)).catch((error)=>console.log(error));
+    promise(100).then((data)=>console.log(data)).catch((error)=>console.log(error));
+
+    OUTPUT-1:-Even 
+    OUTPUT-2:-Odd
+</pre>
+
+<h2 class="question">Q-7.Create example to explain async await function?</h2>
+<P>ANS:- <span class="one">Output:-A E I O U
+    <ul>
+        <li>An async keyword will be added to a function when you want to platform in an asynchronous way in javascript.</li>
+        <li>For this asynchronous behavior we have to write the await keyword in the line where we want the code to hold.</li>
+        <li>NOTE:-if the async keyword is not added in the function then we can not write await keyword in the function.</li>
+    </ul>
+</span></P>
+<pre>
+    function display(num,timeout){
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                console.log(num);
+                resolve("Promise Resolve....!!");
+            }, timeout);
+        })
+    }
+    async function call(){
+        await display("A",2000);
+        await display("E",1000);
+        await display("I",4000);
+        await display("O",3000);
+        await display("U",5000);
+    }
+    call();
+</pre>
+
+<h2 class="question">Q-8.Create example to explain promise .all function?</h2>
+<p>ANS:- <span class="one"> The Promise.all() static method take an iterable of the promises as input and return a single Promise.
+    and it is returned promise filfill when all promise is fullfill.
+</span></p>
+<pre>
+    const promise1=new Promise((resolve,reject)=>{
+        let batch="EA22";
+        if(batch==="EA22")
+        {
+            resolve("Welcome to EA22 batch.");
+        }
+        else
+        {
+            reject("Bad Entry...!!");
+        }
+    })
+    
+    promise1.then((data)=>console.log(data)).catch((error)=>console.log(error));
+    
+    const promise2=new Promise((resolve,reject)=>{
+        let roll=30;
+        if(roll===30)
+        {
+            resolve("Welcome back Niyaz Alam.");
+        }
+        else
+        {
+            reject("Incorrect Roll Number...!!");
+        }
+    })
+    
+    promise2.then((data)=>console.log(data)).catch((error)=>console.log(error));
+    
+    const promise3=new Promise((resolve,reject)=>{
+        let id="EA3030";
+        if(id="EA3030")
+        {
+            resolve("Welcome to Successfull Register.");
+        }
+        else
+        {
+            reject("Wrong ID..!!");
+        }
+    })
+    
+    promise3.then((data)=>console.log(data)).catch((error)=>console.log(error));
+    
+    Promise.all([promise1,promise2,promise3]).then((data)=>console.log(data)).catch((error)=>console.log(error));
+    //By Using Spread---
+    Promise.all([promise1,promise2,promise3]).then((data)=>console.log(...data)).catch((error)=>console.log(...error));
+
+
+    OUTPUT:-
+    [
+    'Welcome to EA22 batch.',
+    'Welcome back Niyaz Alam.',
+    'Welcome to Successfull Register.'
+    ]
+
+    * BY USING SPREAD METHOD OUTPUT:-Welcome to EA22 batch. Welcome back Niyaz Alam. Welcome to Successfull Register.
+</pre>
+
+<h2 class="question">Q-9.Write a callback function to print number from 1 to 7, which 1 should
+    be 1 sec, 2 should be 2 sec, 3 should be 3 sec and so on.
+    <br>
+    Numbers
+    <br>
+    1
+    <br>
+    2
+    <br>
+    3
+    <br>
+    4
+    <br>
+    5
+    <br>
+    6
+    <br>
+    7
+</h2>
+<p>ANS:- <span class="one">OUTPUT:-1 2 3 4 5 6 7</span></p>
+<pre>
+    function printNumbers() {
+        let i = 1;
+        const promise = new Promise((resolve, reject) => {
+          const intervalId = setInterval(() => {
+            console.log(i);
+            i++;
+            if (i > 7) {
+              clearInterval(intervalId);
+              resolve();
+            }
+          }, i * 1000);
+        });
+        return promise;
+      }
+    
+      printNumbers().then((data)=>console.log(data)).catch((error)=>console.log(error));
+
+
+      OUTPUT:- 
+      1
+      2
+      3
+      4
+      5
+      6
+      7
+</pre>
+</body>
+<script src="./script.js"></script>
+</html>
